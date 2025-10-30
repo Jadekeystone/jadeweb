@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <style>
-      /* Additional styles specific to the news page */
+      /* News page specific styles */
       .news-header {
         position: relative;
         padding: 100px 0 50px;
@@ -39,14 +39,13 @@
       }
 
       .news-date {
-        position: absolute;
-        top: 15px;
-        right: 15px;
         background-color: var(--jade-primary);
         color: white;
         padding: 5px 10px;
         border-radius: 5px;
         font-weight: bold;
+        display: inline-block;
+        margin-bottom: 10px;
       }
 
       .news-tag {
@@ -60,34 +59,42 @@
         margin-bottom: 10px;
       }
 
-      .quote-box {
-        border-left: 4px solid var(--jade-primary);
-        padding-left: 20px;
-        margin: 25px 0;
-        font-style: italic;
-        background-color: rgba(0, 168, 107, 0.05);
+      .news-filter {
+        background-color: #f8f9fa;
+        border-radius: 10px;
         padding: 20px;
-        border-radius: 0 10px 10px 0;
+        margin-bottom: 30px;
       }
 
-      .partner-logos {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 30px;
-        margin: 40px 0;
-        flex-wrap: wrap;
+      .filter-btn {
+        margin: 5px;
+        border-radius: 20px;
       }
 
-      .partner-logo {
-        height: 80px;
-        width: auto;
-        filter: grayscale(100%);
-        transition: filter 0.3s;
+      .news-item {
+        margin-bottom: 40px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #e9ecef;
       }
 
-      .partner-logo:hover {
-        filter: grayscale(0%);
+      .news-item:last-child {
+        border-bottom: none;
+      }
+
+      .news-excerpt {
+        color: #6c757d;
+        margin-bottom: 15px;
+      }
+
+      .read-more {
+        color: var(--jade-primary);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .read-more:hover {
+        color: var(--jade-dark);
+        text-decoration: underline;
       }
 
       .news-sidebar {
@@ -118,44 +125,7 @@
         color: #6c757d;
       }
 
-      .news-share {
-        display: flex;
-        gap: 10px;
-        margin-top: 30px;
-      }
-
-      .share-btn {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        transition: all 0.3s;
-      }
-
-      .share-btn:hover {
-        transform: translateY(-3px);
-      }
-
-      .share-fb {
-        background-color: #3b5998;
-      }
-
-      .share-twitter {
-        background-color: #1da1f2;
-      }
-
-      .share-linkedin {
-        background-color: #0077b5;
-      }
-
-      .share-whatsapp {
-        background-color: #25d366;
-      }
-
-      .highlight-box {
+      .newsletter-box {
         background: linear-gradient(135deg, var(--jade-primary), var(--jade-dark));
         color: white;
         padding: 30px;
@@ -164,12 +134,8 @@
       }
 
       @media (max-width: 768px) {
-        .partner-logos {
-          flex-direction: column;
-        }
-        
-        .partner-logo {
-          height: 60px;
+        .news-header {
+          padding: 80px 0 30px;
         }
       }
     </style>
@@ -192,8 +158,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="news.html">News & Updates</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Partnership with Paints & Coatings Skill Council</li>
+            <li class="breadcrumb-item active" aria-current="page">News & Updates</li>
           </ol>
         </nav>
       </div>
@@ -204,182 +169,207 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8">
-            <article>
-              <div class="news-tag">Partnership</div>
-              <h1 class="mb-3">Jade Keystone Solutions and Paints & Coatings Skill Council Join Hands to Strengthen India's Skilling Ecosystem</h1>
-              <p class="text-muted mb-4"><i class="far fa-calendar me-2"></i> October 2025</p>
-              
-              <div class="mb-4">
-                <img src="images/pcsc-partnership.webp" 
-                     alt="Jade Keystone Solutions and Paints & Coatings Skill Council Partnership" 
-                     class="img-fluid rounded">
+            <!-- News Filter -->
+            <div class="news-filter">
+              <h5 class="mb-3">Filter by Category:</h5>
+              <div class="filter-buttons">
+                <button class="btn btn-primary filter-btn active" data-filter="all">All News</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="partnership">Partnerships</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="company">Company News</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="innovation">Innovation</button>
+                <button class="btn btn-outline-primary filter-btn" data-filter="event">Events</button>
+              </div>
+            </div>
+
+            <!-- News Items -->
+            <div id="news-container">
+              <!-- Partnership News Item -->
+              <div class="news-item" data-category="partnership">
+                <div class="news-tag">Partnership</div>
+                <h3>Jade Keystone Solutions and Paints & Coatings Skill Council Join Hands</h3>
+                <div class="news-date">October 2025</div>
+                
+                <div class="mb-4">
+                  <img src="images/pcsc-partnership.webp" 
+                       alt="Jade Keystone Solutions and Paints & Coatings Skill Council Partnership" 
+                       class="img-fluid rounded">
+                </div>
+
+                <p class="news-excerpt">Mumbai, October 2025: Jade Keystone Solutions Pvt. Ltd. (JKSPL) and the Paints & Coatings Skill Council (PCSC) have signed a Memorandum of Understanding (MoU) to collaborate on advancing skill development, industry readiness, and innovation in the paints and coatings sector.</p>
+                
+                <p>The partnership aims to bring together industry insight, training expertise, and communication outreach to empower youth, workers, and enterprises through structured programs and digital initiatives.</p>
+                
+                <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#newsModal1">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
               </div>
 
-              <p class="lead">Mumbai, October 2025: Jade Keystone Solutions Pvt. Ltd. (JKSPL) and the Paints & Coatings Skill Council (PCSC) have signed a Memorandum of Understanding (MoU) to collaborate on advancing skill development, industry readiness, and innovation in the paints and coatings sector.</p>
-              
-              <p>The partnership aims to bring together industry insight, training expertise, and communication outreach to empower youth, workers, and enterprises through structured programs and digital initiatives. Under this collaboration, both organizations will jointly undertake initiatives in awareness, advocacy, technology integration, and employment enablement, aligning with the goals of the Skill India Mission.</p>
-              
-              <div class="highlight-box">
-                <h3 class="mb-3">Key Focus Areas</h3>
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <i class="fas fa-microphone-alt me-2"></i> "Skill & Sector" Podcast Series
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <i class="fas fa-graduation-cap me-2"></i> Training Innovation
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <i class="fas fa-users me-2"></i> Industry-Academia Engagement
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <i class="fas fa-digital-tachograph me-2"></i> Digital Advocacy
+              <!-- Company News Item -->
+              <div class="news-item" data-category="company">
+                <div class="news-tag">Company News</div>
+                <h3>JKSPL Launches Digital Learning Platform</h3>
+                <div class="news-date">September 2025</div>
+                
+                <div class="mb-4">
+                  <img src="images/digital-learning-platform.webp" 
+                       alt="Digital Learning Platform" 
+                       class="img-fluid rounded">
+                </div>
+
+                <p class="news-excerpt">Jade Keystone Solutions announces the launch of its innovative digital learning platform designed to revolutionize skill development and workforce training across multiple industries.</p>
+                
+                <p>The platform features interactive modules, virtual simulations, and personalized learning paths to enhance employee capabilities and organizational performance.</p>
+                
+                <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#newsModal2">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+
+              <!-- Innovation News Item -->
+              <div class="news-item" data-category="innovation">
+                <div class="news-tag">Innovation</div>
+                <h3>New AI-Powered Training Methodology Implemented</h3>
+                <div class="news-date">August 2025</div>
+                
+                <div class="mb-4">
+                  <img src="images/ai-training.webp" 
+                       alt="AI Training Methodology" 
+                       class="img-fluid rounded">
+                </div>
+
+                <p class="news-excerpt">Jade Keystone Solutions has successfully implemented an AI-powered training methodology that personalizes learning experiences and significantly improves knowledge retention.</p>
+                
+                <p>This innovative approach uses machine learning algorithms to adapt training content based on individual learning patterns and performance metrics.</p>
+                
+                <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#newsModal3">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+
+              <!-- Event News Item -->
+              <div class="news-item" data-category="event">
+                <div class="news-tag">Event</div>
+                <h3>Annual Skill Development Summit 2025</h3>
+                <div class="news-date">July 2025</div>
+                
+                <div class="mb-4">
+                  <img src="images/skill-summit.webp" 
+                       alt="Skill Development Summit" 
+                       class="img-fluid rounded">
+                </div>
+
+                <p class="news-excerpt">Jade Keystone Solutions successfully hosted the Annual Skill Development Summit 2025, bringing together industry leaders, educators, and policymakers to discuss the future of workforce training.</p>
+                
+                <p>The summit featured keynote speeches, panel discussions, and workshops focused on emerging trends in skill development and industry-academia collaboration.</p>
+                
+                <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#newsModal4">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
+              </div>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="newsletter-box text-center">
+              <h3 class="mb-3">Stay Updated</h3>
+              <p class="mb-4">Subscribe to our newsletter to receive the latest news and updates directly in your inbox.</p>
+              <div class="row justify-content-center">
+                <div class="col-md-8">
+                  <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Your email address">
+                    <button class="btn btn-light" type="button">Subscribe</button>
                   </div>
                 </div>
               </div>
-              
-              <p>A key focus area under this MoU is the launch of the "Skill & Sector" podcast series, featuring conversations with industry leaders, trainers, and entrepreneurs – designed to inspire and showcase India's evolving skilling landscape.</p>
-              
-              <div class="quote-box">
-                <p>"This partnership reflects our shared vision of creating meaningful pathways for skill-based growth and entrepreneurship. Together with PCSC, we aim to communicate the power of skills that shape industries, livelihoods, and India's future."</p>
-                <footer class="blockquote-footer mt-2">Mr. Narendra Deshpande, <cite title="Source Title">Director of Jade Keystone Solutions</cite></footer>
-              </div>
-              
-              <div class="quote-box">
-                <p>"Through this collaboration, we will highlight the transformative role of skilling in the paints and coatings sector and create a sustainable platform for industry – academia – youth engagement."</p>
-                <footer class="blockquote-footer mt-2">Mr. Jagdish Acharya, <cite title="Source Title">CEO of Paints & Coatings Skill Council</cite></footer>
-              </div>
-              
-              <p>The MoU opens new avenues for cooperation in training innovation, storytelling, and digital advocacy, helping make the sector more aspirational, inclusive, and future-ready.</p>
-              
-              <p class="lead text-center mt-5 mb-4">Because every skill adds colour to our collective future.</p>
-              
-              <div class="partner-logos">
-                <img src="images/jade-keystone-logo.png" alt="Jade Keystone Solutions" class="partner-logo">
-                <span class="text-muted">+</span>
-                <img src="images/pcsc-logo.png" alt="Paints & Coatings Skill Council" class="partner-logo">
-              </div>
-              
-              <div class="news-share">
-                <span class="me-3">Share this news:</span>
-                <a href="#" class="share-btn share-fb"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="share-btn share-twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="share-btn share-linkedin"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="share-btn share-whatsapp"><i class="fab fa-whatsapp"></i></a>
-              </div>
-            </article>
+            </div>
           </div>
           
           <div class="col-lg-4">
+            <!-- Recent News Sidebar -->
             <div class="news-sidebar">
               <h4>Recent News</h4>
               
               <div class="sidebar-news-item">
-                <h6><a href="news-digital-platform.html" class="text-decoration-none">JKSPL Launches Digital Learning Platform</a></h6>
+                <h6><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#newsModal1">Partnership with Paints & Coatings Skill Council</a></h6>
+                <p class="sidebar-news-date">October 2025</p>
+              </div>
+              
+              <div class="sidebar-news-item">
+                <h6><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#newsModal2">Digital Learning Platform Launch</a></h6>
                 <p class="sidebar-news-date">September 2025</p>
               </div>
               
               <div class="sidebar-news-item">
-                <h6><a href="news-expansion.html" class="text-decoration-none">Expansion to South East Asian Markets</a></h6>
+                <h6><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#newsModal3">AI-Powered Training Implementation</a></h6>
                 <p class="sidebar-news-date">August 2025</p>
               </div>
               
               <div class="sidebar-news-item">
-                <h6><a href="news-csr-report.html" class="text-decoration-none">Annual Corporate Responsibility Report Released</a></h6>
+                <h6><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#newsModal4">Skill Development Summit 2025</a></h6>
                 <p class="sidebar-news-date">July 2025</p>
-              </div>
-              
-              <div class="sidebar-news-item">
-                <h6><a href="news-training-center.html" class="text-decoration-none">New Training Center Inaugurated in Pune</a></h6>
-                <p class="sidebar-news-date">June 2025</p>
               </div>
             </div>
             
+            <!-- Categories Sidebar -->
             <div class="news-sidebar">
               <h4>Categories</h4>
               <ul class="list-unstyled">
-                <li class="mb-2"><a href="news-category-partnerships.html" class="text-decoration-none">Partnerships <span class="badge bg-primary">3</span></a></li>
-                <li class="mb-2"><a href="news-category-company.html" class="text-decoration-none">Company News <span class="badge bg-primary">5</span></a></li>
-                <li class="mb-2"><a href="news-category-insights.html" class="text-decoration-none">Industry Insights <span class="badge bg-primary">7</span></a></li>
-                <li class="mb-2"><a href="news-category-events.html" class="text-decoration-none">Events <span class="badge bg-primary">2</span></a></li>
-                <li class="mb-2"><a href="news-category-awards.html" class="text-decoration-none">Awards <span class="badge bg-primary">1</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none filter-sidebar" data-filter="all">All News <span class="badge bg-primary">12</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none filter-sidebar" data-filter="partnership">Partnerships <span class="badge bg-primary">4</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none filter-sidebar" data-filter="company">Company News <span class="badge bg-primary">5</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none filter-sidebar" data-filter="innovation">Innovation <span class="badge bg-primary">3</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none filter-sidebar" data-filter="event">Events <span class="badge bg-primary">2</span></a></li>
               </ul>
             </div>
             
+            <!-- Archive Sidebar -->
             <div class="news-sidebar">
-              <h4>Subscribe</h4>
-              <p>Stay updated with our latest news and announcements.</p>
-              <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Your email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
-              </div>
+              <h4>Archive</h4>
+              <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-decoration-none">October 2025 <span class="badge bg-secondary">2</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none">September 2025 <span class="badge bg-secondary">3</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none">August 2025 <span class="badge bg-secondary">2</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none">July 2025 <span class="badge bg-secondary">3</span></a></li>
+                <li class="mb-2"><a href="#" class="text-decoration-none">June 2025 <span class="badge bg-secondary">2</span></a></li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Related News -->
-    <section class="py-5 bg-light">
-      <div class="container">
-        <h2 class="text-center mb-5">Related News</h2>
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="card news-card h-100">
-              <div class="position-relative">
-                <img src="images/digital-learning-platform.webp" 
-                     class="card-img-top" alt="Digital Learning Platform">
-                <div class="news-date">Sep 2025</div>
-              </div>
-              <div class="card-body">
-                <div class="news-tag">Innovation</div>
-                <h5 class="card-title">JKSPL Launches Digital Learning Platform</h5>
-                <p class="card-text">New platform to enhance skill development through digital solutions and interactive learning modules.</p>
-                <a href="news-digital-platform.html" class="btn btn-outline-primary">Read More</a>
-              </div>
-            </div>
+    <!-- News Modals -->
+    <!-- Modal 1: PCSC Partnership -->
+    <div class="modal fade" id="newsModal1" tabindex="-1" aria-labelledby="newsModal1Label" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newsModal1Label">Partnership with Paints & Coatings Skill Council</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          
-          <div class="col-md-4">
-            <div class="card news-card h-100">
-              <div class="position-relative">
-                <img src="images/expansion-asia.webp" 
-                     class="card-img-top" alt="Expansion to Southeast Asia">
-                <div class="news-date">Aug 2025</div>
-              </div>
-              <div class="card-body">
-                <div class="news-tag">Growth</div>
-                <h5 class="card-title">Expansion to South East Asian Markets</h5>
-                <p class="card-text">Jade Keystone Solutions announces strategic expansion into emerging markets in Southeast Asia.</p>
-                <a href="news-expansion.html" class="btn btn-outline-primary">Read More</a>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="card news-card h-100">
-              <div class="position-relative">
-                <img src="images/training-center-pune.webp" 
-                     class="card-img-top" alt="Training Center Pune">
-                <div class="news-date">Jun 2025</div>
-              </div>
-              <div class="card-body">
-                <div class="news-tag">Infrastructure</div>
-                <h5 class="card-title">New Training Center Inaugurated in Pune</h5>
-                <p class="card-text">State-of-the-art facility to provide hands-on training and skill development programs.</p>
-                <a href="news-training-center.html" class="btn btn-outline-primary">Read More</a>
-              </div>
-            </div>
+          <div class="modal-body">
+            <!-- Full content of the PCSC partnership article would go here -->
+            <p>Full detailed content about the partnership...</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Modal 2: Digital Platform -->
+    <div class="modal fade" id="newsModal2" tabindex="-1" aria-labelledby="newsModal2Label" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newsModal2Label">Digital Learning Platform Launch</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Full content of the digital platform article would go here -->
+            <p>Full detailed content about the digital platform launch...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add similar modals for other news items -->
 
     <!-- CTA -->
     <section class="py-5 bg-primary text-white">
       <div class="container text-center">
-        <h2 class="mb-4">Interested in Our Initiatives?</h2>
+        <h2 class="mb-4">Want to Stay Updated?</h2>
         <p class="lead mb-4">
-          Learn more about our partnerships and how we're shaping the future of skill development.
+          Follow us on social media or subscribe to our newsletter for the latest news.
         </p>
         <a href="contact.html" class="btn btn-light btn-lg me-2">Contact Us</a>
         <a href="services.html" class="btn btn-outline-light btn-lg">Our Services</a>
@@ -392,5 +382,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/include.js"></script>
+    <script>
+      // Simple filtering functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const filterSidebar = document.querySelectorAll('.filter-sidebar');
+        const newsItems = document.querySelectorAll('.news-item');
+        
+        // Filter button functionality
+        filterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons.forEach(btn => {
+              if(btn.getAttribute('data-filter') === filter) {
+                btn.classList.add('active');
+              }
+            });
+            
+            // Filter news items
+            newsItems.forEach(item => {
+              if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+        
+        // Sidebar filter functionality
+        filterSidebar.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const filter = this.getAttribute('data-filter');
+            
+            // Trigger the corresponding filter button
+            filterButtons.forEach(btn => {
+              if(btn.getAttribute('data-filter') === filter) {
+                btn.click();
+              }
+            });
+          });
+        });
+      });
+    </script>
   </body>
 </html>
