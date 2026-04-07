@@ -394,13 +394,3 @@ body {
 .navbar-custom {
     top: 35px;
 }
-
-/* Add spacing to body */
- body {
-            padding-top: 108px;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding-top: 90px;
-            }
-        }
