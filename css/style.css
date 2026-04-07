@@ -112,7 +112,6 @@ footer {
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow-x: hidden;
-    padding-top: 56px;
     /* To account for fixed navbar */
 }
 
@@ -398,5 +397,5 @@ body {
 
 /* Add spacing to body */
 body {
-    padding-top: 100px;
+    padding-top: 200px;
 }
