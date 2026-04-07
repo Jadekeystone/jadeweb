@@ -396,6 +396,11 @@ body {
 }
 
 /* Add spacing to body */
-body {
-   padding-top: 8px;
-}
+ body {
+            padding-top: 108px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+        }
